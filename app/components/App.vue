@@ -5,20 +5,20 @@
       <ActionItem text="NEW PASSWORD" @tap="onChangePassword"></ActionItem>
     </ActionBar>
     <StackLayout>
-      <GroceryList :items="items" />
+      <TodoList :items="items" />
     </StackLayout>
   </Page>
 </template>
 
 <script > 
-  import GroceryList from "./GroceryList";
+  import TodoList from "./TodoList";
   import AddItem from './AddItem';
   import * as localstorage from 'nativescript-localstorage';
   import axios from "axios";
   import Account from "./Account";
   
   export default {
-    components: {GroceryList},
+    components: {TodoList},
     data() {
       return {
         items: []

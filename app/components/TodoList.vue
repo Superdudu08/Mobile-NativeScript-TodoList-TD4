@@ -1,24 +1,24 @@
 <template>
     <ListView for="item in items">
         <v-template>
-            <GroceryItem :groceryItem="item" @doneTap="onToggleDone" @nameTap="onItemTap" @deleteTap="onDeleteTap"></GroceryItem>
+            <TodoItem :todoItem="item" @doneTap="onToggleDone" @nameTap="onItemTap" @deleteTap="onDeleteTap"></TodoItem>
         </v-template>
     </ListView>
 </template>
 
 <script > 
-    import GroceryItem from "./GroceryItem";
+    import TodoItem from "./TodoItem";
     import Detail from './Detail';
     import axios from "axios";
     import * as localstorage from "nativescript-localstorage";
     import Account from "./Account";
 
   export default {
-    components: {GroceryItem, Detail},
+    components: {TodoItem, Detail},
     props: ['items'],
     methods: {
-        onToggleDone(groceryItem) {
-            const idx = this.items.findIndex(i => i.uuid === groceryItem.uuid);
+        onToggleDone(todoItem) {
+            const idx = this.items.findIndex(i => i.uuid === todoItem.uuid);
             axios({
                     method: "post",
                     url: "https://api.todolist.sherpa.one/users/check-token",
@@ -33,10 +33,10 @@
                             'Authorization': 'Bearer ' + localStorage.getItem("token")
                         },
                         data: {
-                            "done": !groceryItem.done
+                            "done": !todoItem.done
                         }
                     }).then(() => {
-                        this.items[idx].done = !groceryItem.done;
+                        this.items[idx].done = !todoItem.done;
                     }).catch((response) => {
                         alert("Erreur API\n" + response);
                     });
@@ -53,7 +53,7 @@
         onItemTap(args) {
             this.$navigateTo(Detail, {
                 props: {
-                    groceryItem: args
+                    todoItem: args
                 },
                 transitionAndroid: {
                     name:"slide",
@@ -62,8 +62,8 @@
                 }
             });
         },
-        onDeleteTap(groceryItem) {
-            const idx = this.items.findIndex(i => i.uuid === groceryItem.uuid);
+        onDeleteTap(todoItem) {
+            const idx = this.items.findIndex(i => i.uuid === todoItem.uuid);
 
             if (this.items[idx].done) {
                     axios({

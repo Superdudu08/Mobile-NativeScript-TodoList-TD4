@@ -14,9 +14,8 @@
 
 * La création de compte n'est pas fonctionnelle malgré l'utilisation de la requête utilisée pour créer le compte par défaut en dur dans l'application.
 
-* Ces deux derniers points ont été particulièrement frustrants, puisque je suppose qu'en ayant accès à la réponse de l'API dans l'application, il aurait été possible de les résoudre, ce qui n'était pas le cas sur mobile.
+* Ces deux derniers points ont été particulièrement frustrants, puisque je suppose qu'en ayant accès à la réponse de l'API dans une console/debugger, il aurait été possible de les résoudre, ce qui n'était pas le cas sur mobile.
 
 * `tns resources generate icons  app/assets/images/appicon.png` a été utilisé pour générer l'icone
 
 * `tns resources generate splashes  app/assets/images/todoSplashes.png` a été utilisé pour générer le splash screen
-

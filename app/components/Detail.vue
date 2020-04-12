@@ -3,7 +3,7 @@
         <ActionBar title="Details">
         </ActionBar>
         <StackLayout>
-            <Label :text="groceryItem.content"></Label>
+            <Label :text="todoItem.content"></Label>
             <Button text="Back" @tap="onBackTap"></Button>
             <Button :text="statusText" @tap='toggle'></Button>
         </StackLayout>
@@ -16,7 +16,7 @@ import axios from "axios";
 import Account from "./Account";
 
 export default {
-    props: ['groceryItem'],
+    props: ['todoItem'],
     data: function() {
         return {
            
@@ -24,7 +24,7 @@ export default {
     },
     computed: {
         statusText: function() {
-            return this.groceryItem.done ? 'Done' : 'Not done';
+            return this.todoItem.done ? 'Done' : 'Not done';
         }
     },
     methods: {
@@ -38,15 +38,15 @@ export default {
                 }).then(() => {
                     axios({
                         method: "patch",
-                        url: "https://api.todolist.sherpa.one/users/" + localstorage.getItem("uuid") + "/todos/" + this.groceryItem.uuid,
+                        url: "https://api.todolist.sherpa.one/users/" + localstorage.getItem("uuid") + "/todos/" + this.todoItem.uuid,
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem("token")
                         },
                         data: {
-                            "done": !this.groceryItem.done
+                            "done": !this.todoItem.done
                         }
                     }).then(() => {
-                        this.groceryItem.done = !this.groceryItem.done;
+                        this.todoItem.done = !this.todoItem.done;
                     }).catch((response) => {
                         alert("Erreur API\n" + response);
                     });

@@ -1,14 +1,14 @@
 <template>
     <GridLayout columns="100,*,40" rows="60">
-        <Label col="0" :text="statusText" @tap="onDoneTap" class="statusDone" :class="{ 'toDoDone' : groceryItem.done }"></Label>
-        <Label col="1" class="item-name" :class="{ 'line-through' : groceryItem.done }" :text="groceryItem.content" @tap="onNameTap"></Label>
-        <Label col="2" v-if='groceryItem.done' @tap="onDeleteTap" text="🗑️" class="deleteButton"></Label> 
+        <Label col="0" :text="statusText" @tap="onDoneTap" class="statusDone" :class="{ 'toDoDone' : todoItem.done }"></Label>
+        <Label col="1" class="item-name" :class="{ 'line-through' : todoItem.done }" :text="todoItem.content" @tap="onNameTap"></Label>
+        <Label col="2" v-if='todoItem.done' @tap="onDeleteTap" text="🗑️" class="deleteButton"></Label> 
     </GridLayout>
 </template>
 
 <script>
 export default {
-    props: ['groceryItem'],
+    props: ['todoItem'],
     data: function() {
         return {
            
@@ -16,21 +16,21 @@ export default {
     },
     computed: {
         statusText: function() {
-            return this.groceryItem.done ? 'DONE' : 'TO DO';
+            return this.todoItem.done ? 'DONE' : 'TO DO';
         }
     },
     methods: {
         toggle: function() {
-           this.$emit('toggleDone', this.groceryItem);
+           this.$emit('toggleDone', this.todoItem);
         },
         onDoneTap: function() {
-            this.$emit('doneTap', this.groceryItem);
+            this.$emit('doneTap', this.todoItem);
         },
         onNameTap: function() {
-            this.$emit('nameTap', this.groceryItem);
+            this.$emit('nameTap', this.todoItem);
         },
         onDeleteTap: function() {
-            this.$emit('deleteTap', this.groceryItem);
+            this.$emit('deleteTap', this.todoItem);
         }
     }
 }
