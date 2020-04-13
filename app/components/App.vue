@@ -76,15 +76,14 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
-        }).then(axios({
+        }).then( () => axios({
                   method: "post",
                   url: "https://api.todolist.sherpa.one/users/" + localStorage.getItem("uuid") + "/reset/password",
                   headers: {
                       'Authorization': 'Bearer ' + localStorage.getItem("token")
                   }
         })).then((response) => {
-          let {data} = response;
-          let nouveauPassword = data.password;
+          this.alert("Nouveau mot de passe : " + response.data.password);
         })
       }
     },

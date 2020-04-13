@@ -78,13 +78,7 @@
             return axios({
                 method: "post",
                 url: "https://api.todolist.sherpa.one/users/signup",
-                auth: {
-                    firstname: user.firstname,
-                    lastname: user.lastname,
-                    email: user.email,
-                    gender: user.gender
-                },
-                data: JSON.stringify(data)
+                data: data
             });
         },
         login(user) {
@@ -173,10 +167,9 @@
                     userService
                     .register(this.user)
                     .then((response) => {
-                        let {data} = response;
                         this.alert("Vous pouvez maintenant vous connecter avec les identifiants suivant: \n" +
-                            "- Email : " + data.email + "\n" +
-                            "- Password : " + data.password);
+                            "- Email : " + response.data.email + "\n" +
+                            "- Password : " + response.data.password);
                     })
                     .catch((result) => {
                         this.alert("Impossible de créer le compte \n" + result);
